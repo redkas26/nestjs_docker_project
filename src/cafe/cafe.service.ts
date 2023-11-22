@@ -3,15 +3,6 @@ import { Cafe } from './entités/cafe.entité';
 
 @Injectable()
 export class CafeService {
-  findAll() {
-    throw new Error('Method not implemented.');
-  }
-  findOne() {
-    throw new Error('Method not implemented.');
-  }
-  create(body: any) {
-    throw new Error('Method not implemented.');
-  }
   private cafe: Cafe[] = [
     {
       id: 1,
@@ -20,53 +11,48 @@ export class CafeService {
       address: ['paris', 'France'],
     },
     {
-      id: 1,
+      id: 2,
       name: 'Karim',
       age: 36,
       address: ['ALger', 'Algerie'],
     },
+    {
+      id: 3,
+      name: 'annes',
+      age: 36,
+      address: ['ALger', 'Algerie'],
+    },
   ];
-};
 
-async findAll() {
-    return this.cafe
-}
+  async findAll() {
+    return this.cafe;
+  }
 
-async findOne( id: string) {
-    return this.cafe.find(x => x.id === +id);
-};
-
-async create( createCafeDto: any ) {
-    this.cafe.push(createCafeDto)
-};
-
-async update(id: string,updateCafeDto: any ) {
-    const updateStudent = this.findOne(id);
-    if (updateStudent) {
-        //
+  async findOne(id: string) {
+    const cafe = this.cafe.find((x) => x.id === +id);
+    if (!cafe) {
+      // throw new HttpException(`This id: ${id} not found`, HttpStatus.NOT_FOUND);
+      // throw new NotFoundException(`This id: ${id} not found`);
+      throw 'Server Error';
     }
-}
+    return cafe;
+  }
 
-remove( id: string ) {
-    const removeCafe = this.cafe.findIndex(x => x.id === +id)
-};
+  async create(createCafeDto: any) {
+    this.cafe.push(createCafeDto);
+  }
 
-function findAll() {
-    throw new Error('Function not implemented.');
-}
-function findOne(id: any, string: any) {
-    throw new Error('Function not implemented.');
-}
+  async update(id: string, updateCafeDto: any) {
+    const updateStudent = this.findOne(updateCafeDto);
+    if (updateStudent) {
+      //
+    }
+  }
 
-function create(createCafeDto: any, any: any) {
-    throw new Error('Function not implemented.');
+  remove(id: string) {
+    const removeCafe = this.cafe.findIndex((x) => x.id === +id);
+    if (removeCafe >= 0) {
+      return this.cafe.splice(removeCafe, 1);
+    }
+  }
 }
-
-function update(id: any, string: any, updateCafeDto: any, any: any) {
-    throw new Error('Function not implemented.');
-}
-
-function remove(id: any, string: any) {
-    throw new Error('Function not implemented.');
-}
-
