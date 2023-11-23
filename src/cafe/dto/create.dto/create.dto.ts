@@ -8,4 +8,7 @@ export class CreateDto {
 
   @IsString({ each: true })
   readonly address: string[];
+
+  @IsString({ each: true })
+  readonly prices: string[];
 }

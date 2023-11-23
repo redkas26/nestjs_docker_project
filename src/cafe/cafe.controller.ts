@@ -20,7 +20,7 @@ export class CafeController {
     return this.cafeService.findAll();
   }
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.cafeService.findOne(id);
   }
 
